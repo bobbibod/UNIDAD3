@@ -2,43 +2,37 @@
 
 public class SpoolV1 {
 	public static void main(String[] args) {
-		int tamanoSpool = 30;
+		int tamanoSpool = Rutinas.nextInt(10,20);
+		int espaciosDisp=tamanoSpool;
+		int noElementosOcupados=0;
 		int noDeArchivos = Rutinas.nextInt(1,10);
 		Spool<ArchivoV2> sp = new Spool(tamanoSpool);
-		Spool<ArchivoV2> spAux = new Spool(tamanoSpool);
 		String[] Extensiones = { "WORD", "PDF", "DOC" };
-
 		System.out.println("Total de Archivos " + noDeArchivos);
 		System.out.println("Tamano Spool " + tamanoSpool);
-
 		for (int j = 0; j < noDeArchivos; j++) {
 			int totalPaginas = Rutinas.nextInt(1, 500);
-			int random = Rutinas.nextInt(1, 15);
+			int random = Rutinas.nextInt(1, 10);
 			int IndiceExt = Rutinas.nextInt(0, 2);
-			int numeroComp=Rutinas.nextInt(1,10);
-			
-			if (tamanoSpool<0) {
-				System.out.println("SPOOL LLENO");
+			int noComp = Rutinas.nextInt(1, 10);
+			int noElementos = (totalPaginas / 100) + ((totalPaginas % 100 > 0) ? 1 : 0);
+			if(noElementos>espaciosDisp){
 				break;
 			}
-
-			for (int i = 0; i < totalPaginas / 100; i++) {
-				spAux.Enviar(new ArchivoV2("D" + random, Extensiones[IndiceExt], numeroComp, totalPaginas, 100));
-				tamanoSpool--;
+			for (int i = 0; i < noElementos; i++) {
+				if (totalPaginas % 100 > 0 && i == noElementos - 1) {
+					ArchivoV2 ar = new ArchivoV2("D" + random, Extensiones[IndiceExt], noComp, totalPaginas,totalPaginas % 100);
+					 sp.Enviar(ar);
+				} else {
+					ArchivoV2 ar = new ArchivoV2("D" + random, Extensiones[IndiceExt], noComp, totalPaginas,100);
+					sp.Enviar(ar);
+				}
+				espaciosDisp--;
 			}
-
-			if (totalPaginas % 100 > 0) {
-				spAux.Enviar(new ArchivoV2("D" + random, Extensiones[IndiceExt], numeroComp, totalPaginas, totalPaginas % 100));
-				tamanoSpool--;
-			}
-			
-			System.out.println("ESPACIO RESTANTE EN EL SPOOL: " + tamanoSpool);
-	
-	
-	}
-	while (spAux.Imprimir() && sp.Enviar(spAux.getDr())) {
-			System.out.println(spAux.getDr());
-			tamanoSpool = tamanoSpool + 1;
+			noElementosOcupados++;
+		}
+	while (sp.Imprimir()) {
+			System.out.println(sp.getDr());
 		}
 }
 }

@@ -1,5 +1,6 @@
-public class SpoolV2 {
+public class SpoolV3 {
 	public static void main(String[] args) {
+        /* 
 		int tamanoSpool = 30;
 		int noDeArchivos = Rutinas.nextInt(1, 10);
 		Spool<ArchivoV2> sp = new Spool(tamanoSpool);
@@ -37,4 +38,5 @@ public class SpoolV2 {
 			System.out.println(cAux.getDr());
 		}
 	}
+        */
 }
