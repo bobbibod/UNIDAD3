@@ -15,6 +15,7 @@ public class SpoolV1 {
 			int totalPaginas = Rutinas.nextInt(1, 500);
 			int random = Rutinas.nextInt(1, 15);
 			int IndiceExt = Rutinas.nextInt(0, 2);
+			int numeroComp=Rutinas.nextInt(1,10);
 			
 			if (tamanoSpool<0) {
 				System.out.println("SPOOL LLENO");
@@ -22,12 +23,12 @@ public class SpoolV1 {
 			}
 
 			for (int i = 0; i < totalPaginas / 100; i++) {
-				spAux.Enviar(new ArchivoV2("D" + random, Extensiones[IndiceExt], 10, totalPaginas, 100));
+				spAux.Enviar(new ArchivoV2("D" + random, Extensiones[IndiceExt], numeroComp, totalPaginas, 100));
 				tamanoSpool--;
 			}
 
 			if (totalPaginas % 100 > 0) {
-				spAux.Enviar(new ArchivoV2("D" + random, Extensiones[IndiceExt], 10, totalPaginas, totalPaginas % 100));
+				spAux.Enviar(new ArchivoV2("D" + random, Extensiones[IndiceExt], numeroComp, totalPaginas, totalPaginas % 100));
 				tamanoSpool--;
 			}
 			
