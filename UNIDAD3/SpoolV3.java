@@ -1,42 +1,55 @@
+/*
+PROYECTO: Spool
+Nombre:Miguel Angel Aponte Felix
+Matricula:24170472
+Materia:Estructura de Datos
+Profesor:Dr.Clemente Garcia Gerardo
+*/
 public class SpoolV3 {
 	public static void main(String[] args) {
-        /* 
-		int tamanoSpool = 30;
-		int noDeArchivos = Rutinas.nextInt(1, 10);
+		int tamanoSpool = Rutinas.nextInt(20, 30);
+		int noDeArchivos = Rutinas.nextInt(1, 15);
 		Spool<ArchivoV2> sp = new Spool(tamanoSpool);
 		Cola<ArchivoV2> cAux = new Cola(tamanoSpool);
 		String[] Extensiones = { "WORD", "PDF", "DOC" };
-		boolean ban = false;
+		boolean ban = false, cabe = true;
 
 		System.out.println("Total de Archivos " + noDeArchivos);
 
 		for (int j = 0; j < noDeArchivos; j++) {
 			int totalPaginas = Rutinas.nextInt(1, 500);
-			int random = Rutinas.nextInt(1, 10);
+			int random = Rutinas.nextInt(1, 30);
 			int IndiceExt = Rutinas.nextInt(0, 2);
 			int numeroComp = Rutinas.nextInt(1, 10);
 			int numElementos = (totalPaginas / 100) + ((totalPaginas % 100 > 0) ? 1 : 0);
+			String archivoAborrar = "";
+			ArchivoV2 ar;
+
 			for (int i = 0; i < numElementos; i++) {
 				if (totalPaginas % 100 > 0 && i == numElementos - 1) {
-					ArchivoV2 ar = new ArchivoV2("D" + random, Extensiones[IndiceExt], numeroComp, totalPaginas,
+					ar = new ArchivoV2("D" + random, Extensiones[IndiceExt], numeroComp, totalPaginas,
 							totalPaginas % 100);
-					ban = cAux.Insertar(ar);
-
+					ban = true;
 				} else {
-					ArchivoV2 ar = new ArchivoV2("D" + random, Extensiones[IndiceExt], numeroComp, totalPaginas,
+					ar = new ArchivoV2("D" + random, Extensiones[IndiceExt], numeroComp, totalPaginas,
 							100);
-					ban = cAux.Insertar(ar);
-
+					ban = true;
 				}
+
+				if (!sp.Enviar(ar)) {
+					archivoAborrar = sp.getDr().getNombre();
+					break;
+				}
+				while (sp.Imprimir() && cAux.Insertar(sp.getDr()));
+				while (sp.Imprimir() && (sp.getDr().getNombre()).contains(archivoAborrar)) {
+					break;
+				}
+				while (cAux.Retirar() && sp.Enviar(cAux.getDr()));
 			}
 		}
-		while (ban == false && cAux.Retirar())
-			;
-		System.out.println("Spool insuficiente para procesar " + noDeArchivos);
-
-		while (cAux.Retirar() && sp.Enviar(cAux.getDr())) {
-			System.out.println(cAux.getDr());
+		System.out.println("ESTADO DEL SPOOL");
+		while (sp.Imprimir()) {
+			System.out.println(sp.getDr());
 		}
 	}
-        */
 }

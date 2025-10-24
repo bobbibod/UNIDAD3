@@ -1,8 +1,13 @@
-
-
+/*
+PROYECTO: Spool
+Nombre:Miguel Angel Aponte Felix
+Matricula:24170472
+Materia:Estructura de Datos
+Profesor:Dr.Clemente Garcia Gerardo
+*/
 public class SpoolV1 {
 	public static void main(String[] args) {
-		int tamanoSpool = Rutinas.nextInt(10,20);
+		int tamanoSpool = Rutinas.nextInt(10,30);
 		int espaciosDisp=tamanoSpool;
 		int noElementosOcupados=0;
 		int noDeArchivos = Rutinas.nextInt(1,10);
@@ -17,6 +22,7 @@ public class SpoolV1 {
 			int noComp = Rutinas.nextInt(1, 10);
 			int noElementos = (totalPaginas / 100) + ((totalPaginas % 100 > 0) ? 1 : 0);
 			if(noElementos>espaciosDisp){
+				System.out.println("Espacio insuficiente spool");
 				break;
 			}
 			for (int i = 0; i < noElementos; i++) {

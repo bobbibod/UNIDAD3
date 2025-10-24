@@ -36,11 +36,9 @@ public class EdoActualColaCirArchivos {
 			if(acu==contadorPaginas) {
 				acu=0;
 				System.out.println(cc.getDr().getNombre()+"  "+cc.getDr().getNoPaginas());
-			}
-				
+			}	
 		}
 		while(ccAux.Retirar() && cc.Insertar(ccAux.getDr())); 
 			
-		
 	}
 }

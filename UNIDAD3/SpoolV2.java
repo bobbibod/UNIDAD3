@@ -1,3 +1,10 @@
+/*
+PROYECTO: Spool
+Nombre:Miguel Angel Aponte Felix
+Matricula:24170472
+Materia:Estructura de Datos
+Profesor:Dr.Clemente Garcia Gerardo
+*/
 public class SpoolV2 {
 	public static void main(String[] args) {
 		int tamanoSpool = 30;
@@ -25,13 +32,13 @@ public class SpoolV2 {
 					ArchivoV2 ar = new ArchivoV2("D" + random, Extensiones[IndiceExt], numeroComp, totalPaginas,
 							100);
 					ban = cAux.Insertar(ar);
-
 				}
 			}
 		}
-		while (ban == false && cAux.Retirar())
-			;
-		System.out.println("Spool insuficiente para procesar " + noDeArchivos);
+		while (ban == false && cAux.Retirar());
+		if (ban == false) {
+			System.out.println("Spool insuficiente para procesar " + noDeArchivos);
+		}
 
 		while (cAux.Retirar() && sp.Enviar(cAux.getDr())) {
 			System.out.println(cAux.getDr());
