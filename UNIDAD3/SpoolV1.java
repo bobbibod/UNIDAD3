@@ -22,7 +22,7 @@ public class SpoolV1 {
 			int noComp = Rutinas.nextInt(1, 10);
 			int noElementos = (totalPaginas / 100) + ((totalPaginas % 100 > 0) ? 1 : 0);
 			if(noElementos>espaciosDisp){
-				System.out.println("Espacio insuficiente spool");
+				System.out.println(" No se pudo insertar todos los archivos Espacio insuficiente spool");
 				break;
 			}
 			for (int i = 0; i < noElementos; i++) {
@@ -37,8 +37,12 @@ public class SpoolV1 {
 			}
 			noElementosOcupados++;
 		}
+		SpoolV3.EstadoActual(sp);
+		System.out.println("____________________");
+		System.out.println("ESTADO DEL SPOOL");
 	while (sp.Imprimir()) {
 			System.out.println(sp.getDr());
 		}
 }
+
 }

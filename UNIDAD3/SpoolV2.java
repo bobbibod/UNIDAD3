@@ -39,9 +39,11 @@ public class SpoolV2 {
 		if (ban == false) {
 			System.out.println("Spool insuficiente para procesar " + noDeArchivos);
 		}
-
+		System.out.println("____________________");
+		System.out.println("ESTADO DEL SPOOL");
 		while (cAux.Retirar() && sp.Enviar(cAux.getDr())) {
 			System.out.println(cAux.getDr());
 		}
+	
 	}
 }

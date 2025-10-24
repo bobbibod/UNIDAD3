@@ -47,9 +47,28 @@ public class SpoolV3 {
 				while (cAux.Retirar() && sp.Enviar(cAux.getDr()));
 			}
 		}
+		System.out.println("ESTADO ACTUAL DEL SPOOL");
+		EstadoActual(sp);
+		System.out.println("____________________");
 		System.out.println("ESTADO DEL SPOOL");
 		while (sp.Imprimir()) {
 			System.out.println(sp.getDr());
 		}
+	}
+	public static void EstadoActual(Spool<ArchivoV2> sp) {
+		Cola<ArchivoV2> cAux=new Cola(20);
+		int contadorPaginas=0,acu=0;
+		while(sp.Imprimir() && cAux.Insertar(sp.getDr())) {
+			if(acu==0) {
+				contadorPaginas=sp.getDr().getNoPaginas();
+			}
+			acu+=sp.getDr().getNoPaginasElemento();
+			if(acu==contadorPaginas) {
+				acu=0;
+				System.out.println(sp.getDr().getNombre()+"  "+sp.getDr().getNoPaginas());
+			}	
+		}
+		while(cAux.Retirar() && sp.Enviar(cAux.getDr())); 
+			
 	}
 }
