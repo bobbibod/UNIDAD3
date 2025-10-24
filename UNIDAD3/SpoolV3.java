@@ -22,6 +22,7 @@ public class SpoolV3 {
 			int IndiceExt = Rutinas.nextInt(0, 2);
 			int numeroComp = Rutinas.nextInt(1, 10);
 			int numElementos = (totalPaginas / 100) + ((totalPaginas % 100 > 0) ? 1 : 0);
+			int elementosInsertados=0;
 			String archivoAborrar = "";
 			ArchivoV2 ar;
 
@@ -29,22 +30,20 @@ public class SpoolV3 {
 				if (totalPaginas % 100 > 0 && i == numElementos - 1) {
 					ar = new ArchivoV2("D" + random, Extensiones[IndiceExt], numeroComp, totalPaginas,
 							totalPaginas % 100);
-					ban = true;
 				} else {
 					ar = new ArchivoV2("D" + random, Extensiones[IndiceExt], numeroComp, totalPaginas,
 							100);
-					ban = true;
 				}
+				elementosInsertados++;
 
 				if (!sp.Enviar(ar)) {
-					archivoAborrar = sp.getDr().getNombre();
-					break;
+					for(int k=0;k<tamanoSpool-elementosInsertados;k++){
+						sp.Imprimir();
+						cAux.Insertar(sp.getDr());
+					}
+					while (sp.Imprimir());
 				}
-				while (sp.Imprimir() && cAux.Insertar(sp.getDr()));
-				while (sp.Imprimir() && (sp.getDr().getNombre()).contains(archivoAborrar)) {
-					break;
-				}
-				while (cAux.Retirar() && sp.Enviar(cAux.getDr()));
+				while(cAux.Retirar() && sp.Enviar(cAux.getDr()));
 			}
 		}
 		System.out.println("ESTADO ACTUAL DEL SPOOL");
